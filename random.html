@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+  <head>
+    <title>
+      lust monster
+    </title>
+    <meta name="generator" content="editplus">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <script src="random.js" language="javascript" type="text/javascript">
+</script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src='//code.responsivevoice.org/responsivevoice.js'></script>
+  <style>
+    
+    div#bear {
+      background-image: url('bear.png');
+      display: block;
+      width: 500px;
+      height: 225px;
+      position: relative;
+    }
+    
+    span#display {
+      position: absolute;
+      width: 250px;
+      height: 60px;
+      
+      top: 52px;
+      right: 32px;
+      
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      vertical-align: middle;
+    }
+    
+    
+  </style>
+  </head>
+  <body id="body">
+    <script language="Javascript" type="text/javascript">
+        $(document).ready(function() {
+          
+          var voicelist = responsiveVoice.getVoices();
+          console.log(voicelist);
+          
+          $('#bear').click(function() {
+            sayOw();
+          });
+          
+          
+        });
+
+        window.setTimeout(doThings, 1000);
+        
+
+        var phrase = [];
+      
+        function doThings() {
+          phrase = [];
+
+          var phraseString = "";
+          for (i = 0; i < 4; i++) 
+          {
+              phrase[i] = getRandomWord(i);
+              phraseString += phrase[i] + " ";
+          }
+          
+          displayPhrase(phraseString);
+        }
+
+        function sayOw() {
+          displayPhrase('Ow! Baboooon!');
+        }
+        
+
+        function displayPhrase(phraseString) {
+        
+            $("#holder").html("");
+            $("#display").html(phraseString);          
+    
+            var tts = encodeURIComponent(phraseString);
+            responsiveVoice.speak(phraseString, "UK English Male", {
+              onend: function() {
+                window.setTimeout(doThings, 5000);
+              }
+            });
+
+            var tot = namelists[0].length * namelists[1].length * namelists[2].length * namelists[3].length;
+            $("#tot").html("(" + tot + " combinations)");
+      
+        }
+        
+    </script>
+    <div id='bear'>
+      <span id="display"></span>
+    </div>
+    <p>
+      <button onclick="doThings()" value="Do various things">Do various things</button>  <span id="tot" style="font-size:x-small;color:#AAA;clear:both;float:left;margin-top:20px"></span>
+    </p>
+    <div id="holder"></div>
+  </body>
+</html>
